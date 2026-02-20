@@ -1,0 +1,18 @@
+<configuration>
+  <property>
+     <name>fs.s3a.impl</name>
+     <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+  </property>
+  <property>
+     <name>fs.s3a.access.key</name>
+     <value>___ACCESS_KEY___</value>
+  </property>
+  <property>
+     <name>fs.s3a.secret.key</name>
+     <value>___SECRET_KEY___</value>
+  </property>
+  <property>
+     <name>dfs.checksum.combine.mode</name>
+     <value>COMPOSITE_CRC</value>
+  </property>
+</configuration>
