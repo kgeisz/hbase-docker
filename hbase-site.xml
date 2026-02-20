@@ -42,6 +42,35 @@
     <value>true</value>
   </property>
   <property>
+    <name>hbase.backup.continuous.wal.dir</name>
+    <value>file:///opt/hbase/backup-root/backup-wal</value>
+  </property>
+  <property>
+    <name>hbase.backup.max.wal.size</name>
+    <value>10240</value>
+  </property>
+  <property>
+    <name>hbase.backup.staged.wal.flush.initial.delay.seconds</name>
+    <value>10</value>
+  </property>
+  <property>
+    <name>hbase.backup.staged.wal.flush.interval.seconds</name>
+    <value>10</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.replication.marker.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>wal.input.ignore.empty.files</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>wal.input.ignore.missing.files</name>
+    <value>true</value>
+  </property>
+
+  <property>
     <name>hbase.master.logcleaner.plugins</name>
     <value>org.apache.hadoop.hbase.backup.master.BackupLogCleaner</value>
   </property>

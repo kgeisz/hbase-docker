@@ -19,3 +19,4 @@ services:
       - "16030:16030"
     volumes:
       - ./utils:/opt/utils
+      - ./hbase-site.xml:${HBASE_CONF_DIR}/hbase-site.xml
