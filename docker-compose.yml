@@ -8,7 +8,7 @@ services:
     hostname: hbase-docker
     volumes:
       - ./utils:/opt/utils
-      - /Users/andor/tmp/data-store/hbase:/data-store/hbase
+      - /Users/kgeiszler/tmp/data-store/hbase:/data-store/hbase
       - ./conf1/hbase-site.xml:${HBASE_CONF_DIR}/hbase-site.xml
       - ./conf1/zoo.cfg:${HBASE_CONF_DIR}/zoo.cfg
 
@@ -18,7 +18,7 @@ services:
     hostname: hbase-docker-2
     volumes:
       - ./utils:/opt/utils
-      - /Users/andor/tmp/data-store/hbase:/data-store/hbase
+      - /Users/kgeiszler/tmp/data-store/hbase:/data-store/hbase
       - ./conf2/hbase-site.xml:${HBASE_CONF_DIR}/hbase-site.xml
       - ./conf2/zoo.cfg:${HBASE_CONF_DIR}/zoo.cfg
 
