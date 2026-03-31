@@ -18,10 +18,6 @@
     <value>file:///data-store/wal</value>
   </property>
   <property>
-    <name>hbase.master.store.dir</name>
-    <value>MasterData2</value>
-  </property>
-  <property>
     <name>hbase.store.file-tracker.impl</name>
     <value>FILE</value>
   </property>
@@ -59,17 +55,4 @@
     <name>hbase.master.hbck.chore.interval</name>
     <value>0</value>
   </property>
-  <property>
-    <name>hbase.coprocessor.master.classes</name>
-    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
-  </property>
-  <property>
-    <name>hbase.coprocessor.regionserver.classes</name>
-    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
-  </property>
-  <property>
-    <name>hbase.coprocessor.region.classes</name>
-    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
-  </property>
-
 </configuration>
