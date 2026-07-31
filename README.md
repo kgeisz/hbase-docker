@@ -1,9 +1,9 @@
 ## HBase Docker Setup
 
-Based on **@vinayakphegde** 's original Docker images for HBase and extended to run two clusters side-by-side mainly for **HBase Read Replica Cluster** feature testing.
-There are two "conf" folders for the individual cluster with common root directories (/data-store/hbase is mounted from local filesystem), but separated WAL 
-directories and separate ZooKeeper databases. The "hbase" cluster is the Active Cluster while the "hbase2" is the Read Replica Cluster which is set up with 
-global read-only mode enabled. 
+Based on **@vinayakphegde**'s original Docker images for HBase and extended to run two clusters side-by-side mainly for **HBase Read Replica Cluster** feature testing.
+There are two `conf` folders for each individual cluster. They share a common root directory called `/data-store/hbase`, which is mounted from the local filesystem. They
+have separated WAL directories and separate ZooKeeper databases. `hbase` cluster is the Active Cluster, while `hbase2` is the Read Replica Cluster and is set up with global
+read-only mode enabled. 
 
 ### Build Docker Images
 
@@ -21,6 +21,7 @@ global read-only mode enabled.
    ```
 2. Create `.env` with the correct details.
    ```bash
+   # HBASE_IMAGE=<your-docker-registry>/<docker-image-name>
    HBASE_IMAGE=vhegde/hbase-docker
    HBASE_CONF_DIR=/opt/hbase/conf
    ```
@@ -60,11 +61,18 @@ docker-compose up -d hbase2
 Exec shell inside container:
 
 ```bash
-docker exec -it <container_id> /bin/bash
+docker exec -it <container-id> /bin/bash
 ```
 
 Shutdown containers:
 
 ```bash
 docker-compose down
+```
+
+If you start the clusters again and see issues with data or the clusters not working as expected, then
+try shutting the clusters down and deleting the `data-store` directory.
+
+```bash
+rm -rf /Users/<YOUR-USERNAME>/tmp/data-store
 ```
