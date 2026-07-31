@@ -52,12 +52,16 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk \
 RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients python3 procps
 
 # Copy the built HBase binaries from the build-stage
-COPY --from=build-stage /opt/hbase-src/hbase-assembly/target/hbase-4.0.0-alpha-1-SNAPSHOT-bin.tar.gz /opt/
+COPY --from=build-stage /opt/hbase-src/hbase-assembly/target/hbase-*-SNAPSHOT-bin.tar.gz /opt/
 
 # Extract HBase binaries
-RUN tar -xzf /opt/hbase-4.0.0-alpha-1-SNAPSHOT-bin.tar.gz -C /opt \
-    && ln -s /opt/hbase-4.0.0-alpha-1-SNAPSHOT /opt/hbase \
-    && rm /opt/hbase-4.0.0-alpha-1-SNAPSHOT-bin.tar.gz
+RUN tar -xzf /opt/hbase-*-SNAPSHOT-bin.tar.gz -C /opt \
+    && ln -s /opt/hbase-*-SNAPSHOT /opt/hbase \
+    && rm /opt/hbase-*-SNAPSHOT-bin.tar.gz
+
+# Copy hadoop-mapreduce-client-common jar to allow bulkloading data
+COPY --from=build-stage /root/.m2/repository/org/apache/hadoop/hadoop-mapreduce-client-common/*/hadoop-mapreduce-client-common-*.jar \
+                        ${HBASE_HOME}/lib/
 
 # Apply custom HBase build steps
 RUN sed -i "s,^. export JAVA_HOME.*,export JAVA_HOME=$JAVA_HOME," ${HBASE_CONF_DIR}/hbase-env.sh \
@@ -90,6 +94,7 @@ USER ${HBASE_USER}
 
 # Create necessary directories for HBase to run
 RUN mkdir -p "$DATA_DIR"/hbase "$DATA_DIR"/run "$DATA_DIR"/logs
+RUN chmod -R 777 "$DATA_DIR"
 
 # Add the 'ls -l' alias
 RUN echo 'alias ll="ls -l"' >> /home/hbase/.bashrc
