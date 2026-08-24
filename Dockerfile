@@ -49,7 +49,9 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk \
     DATA_DIR=/data-store
 
 # Install necessary runtime packages
-RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients python3 procps
+RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && \
+    microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients python3 \
+                        procps nc iputils net-tools iproute
 
 # Copy the built HBase binaries from the build-stage
 COPY --from=build-stage /opt/hbase-src/hbase-assembly/target/hbase-*-SNAPSHOT-bin.tar.gz /opt/
